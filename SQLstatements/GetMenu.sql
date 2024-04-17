@@ -1,0 +1,4 @@
+CREATE PROCEDURE GetMenuList
+AS
+SELECT * FROM Items;
+GO

@@ -1,0 +1,242 @@
+openapi: 3.0.0
+info:
+  version: 1.0.0
+  title: FoodService API
+paths:
+  /Users:
+    get:
+      summary: Get all users
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Users'
+    post:
+      summary: Create a new user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Users'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+  /Users/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a user by ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        '404':
+          description: user not found
+    put:
+      summary: Update a user by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Users'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Users'
+        '404':
+          description: user not found
+    delete:
+      summary: Delete a user by ID
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: user not found
+  /Users/orderHistory/{user}:
+    parameters:
+      - name: user
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get history of user
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/userHistory'
+  /Items:
+    get:
+      summary: Get all items
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Items'
+    post:
+      summary: Create a new Items
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Items'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Items'
+  /Items/{id}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: integer
+    get:
+      summary: Get a Items by ID
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Items'
+        '404':
+          description: Items not found
+    put:
+      summary: Update a Items by ID
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Items'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Items'
+        '404':
+          description: Items not found
+    delete:
+      summary: Delete a Orders by ID
+      responses:
+        '204':
+          description: No Content
+        '404':
+          description: Orders not found
+  /Users/OrderDetails/{user}:
+    parameters:
+      - name: id
+        in: path
+        required: true
+        schema:
+          type: string
+    post:
+      summary: Create a new order
+      requestBody: 
+        required: true
+        content:
+          application/json:
+            schema:
+              type: array
+              items:
+                $ref: '#/components/schemas/OrderDetails'
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/OrderDetails'
+components:
+  schemas:
+    Users:
+      type: object
+      properties:
+        userId:
+          type: integer
+          readOnly: true
+        userName:
+          type: string
+        numRewards:
+          type: integer
+    OrderDetails:
+      type: object
+      properties:
+        OrderDetailId:
+          type: integer
+          readOnly: true
+        OrderId:
+          type: integer
+        itemID:
+          type: integer
+        quantity:
+          type: integer
+    Orders:
+      type: object
+      properties:
+        orderId:
+          type: integer
+          readOnly: true
+        TotalPrice:
+          type: Float
+        userID:
+          type: integer
+    Items:
+      type: object
+      properties:
+        MenuItemId:
+          type: integer
+          readOnly: true
+        ItemName:
+          type: string
+        ItemPrice:
+          type: float
+        ItemDesc:
+          type: string
+    userHistory:
+      type: object
+      properties:
+        ItemName:
+          type: string
+        ItemPrice:
+          type: float
+        Quantity:
+          type: integer

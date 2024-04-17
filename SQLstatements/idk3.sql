@@ -1,0 +1,5 @@
+DELETE FROM Users;
+DELETE FROM Orders;
+DELETE FROM OrderDetails;
+DELETE FROM Items;
+Go

@@ -1,0 +1,39 @@
+BACKEND SERVICE
+using AzureDB, Node.JS, Express
+
+INITializaiton
+for testing purposes a user must install node.js along with the following libraries using these commands
+npm install mssql swagger-ui-express yamljs
+npm install --save-dev dotenv 
+
+user must also create a .env.development file with settings for the database if cloud database has been taken down
+AZURE_SQL_SERVER=<YOURSERVERNAME>.database.windows.net
+AZURE_SQL_DATABASE=<YOURDATABASENAME>
+AZURE_SQL_PORT=1433
+AZURE_SQL_USER=<YOURUSERNAME>
+AZURE_SQL_PASSWORD=<YOURPASSWORD>
+
+
+SQL files
+InitialCreationTables.sql
+    this file will create all tables and dependencies for the project
+InsertionInit.sql
+    this file will create 10 entries to fill the tables
+GetOrderHistory.sql
+    stored procedure to send a user's order history
+creatOrder.sql
+    stored procedure to create a user's order after being placed
+
+JSON files
+User.js
+    holds the calls to the database and waits for the response
+openapi.js 
+    setups the SWAGGER API 
+Items.js  
+    holds the calls to the database for Item manipulation
+Index.js
+    sets up the API pathways and initial configuration for the database
+database.js
+    calls procedures and connects to database for the crud commands from the other JSON files
+    
+
